@@ -5,11 +5,19 @@
   "author": "chabab hassan <chababhassan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node server"
+    "start": "node server",
+    "heroku-postbuild": "cd client/ && yarn install && npm run build"
   },
+  "cacheDirectories": [
+    "node_modules",
+    "client/node_modules"
+  ],
   "dependencies": {
     "body-parser": "^1.18.2",
     "config": "^1.28.1",
     "express": "^4.16.2"
+  },
+  "engines": {
+    "node": "8.9.3"
   }
 }
