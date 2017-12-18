@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const config = require('config');
@@ -27,11 +28,11 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/', function (req, res) {
+app.get('/api', function (req, res) {
   res.send({"message":"Aerolab's Coding Challenge 2017"});
 });
 
-app.post('/auth', function (req, res) {
+app.post('/api/auth', function (req, res) {
   // simulate getting data from database;
   const USERNAME = process.env.USERNAME || config.get('creds.username');
   const PASSWORD = process.env.PASSWORD || config.get('creds.password');
