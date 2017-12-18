@@ -1,0 +1,15 @@
+{
+  "name": "aerolab_coding_challenge",
+  "version": "1.0.0",
+  "description": "Aerolab's Coding Challenge 2017",
+  "author": "chabab hassan <chababhassan@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "config": "^1.28.1",
+    "express": "^4.16.2"
+  }
+}
