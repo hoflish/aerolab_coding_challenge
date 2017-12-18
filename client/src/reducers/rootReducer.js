@@ -1,8 +1,9 @@
 // @flow
 import { combineReducers } from 'redux';
+import accountReducer from './accountReducer';
 
 const rootReducer = combineReducers({
-  key: () => ({}),
+  account: accountReducer,
 });
 
 export default rootReducer;

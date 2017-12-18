@@ -1,0 +1,59 @@
+.HeaderUser {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.HeaderUser .HeaderUser__points {
+  margin-right: 16px;
+}
+
+
+.HeaderUser__profileLink {
+  color: inherit;
+}
+
+.HeaderUser__profileLink:hover {
+  /*color: inherit;*/
+}
+
+.HeaderUser .HeaderUser__name {
+  font-size: inherit;
+  padding: 0 4px;
+}
+
+.Header__points-visibility {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerUser__currentPts {
+  font-size: 18px;
+  line-height: 1.25;
+  color: #8C9AE7;
+}
+
+.header__points-visibility span:nth-child(1) {
+  margin-right: 4px;
+  vertical-align: top;
+  line-height: 20px;
+}
+
+.sep {
+    height: 30px;
+    margin: 0 12px;
+    width: 1px;
+    background-color: rgba(211, 211, 242,.456);
+}
+
+.fundBtn {
+  font-weight: 700 !important;
+  border-color: rgba(211, 211, 242,.456) !important;
+  color: #8C9AE7 !important;
+}
+
+.fundBtn:hover {
+   border-color: rgba(211, 211, 242,.789);
+   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2) !important;
+}

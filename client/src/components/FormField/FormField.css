@@ -1,0 +1,24 @@
+.FormField {
+  background-color: #fcfbfc;
+  color: inherit;
+  border: 1px solid #d3d3f2;
+}
+
+.FormField {
+  align-items: center;
+  border-radius: 3px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.FormField .icon {
+  position: absolute;
+  padding: 0 4px;
+  right: 0;
+  background: white;
+  height: 28px;
+}

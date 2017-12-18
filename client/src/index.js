@@ -5,6 +5,8 @@ import Routes from "./routes/routes";
 import configureStore from "./store/configureStore";
 import {loadState, saveState} from "./utils/localStorage";
 import './main.css';
+global.Promise = require("bluebird");
+Promise.config({ cancellation: true });
 
 const persistedState = loadState();
 const store = configureStore(persistedState);
