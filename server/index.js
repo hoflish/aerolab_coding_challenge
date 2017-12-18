@@ -11,6 +11,9 @@ app.set('port', process.env.PORT || 5000);
 
 const TOKEN = process.env.ACCESS_TOKEN || config.get('access_token');
 
+app.use(express.static(path.resolve(__dirname, '../client/build')));
+
+
 // Add a random delay to all requests.
 // Set SHOULD_DELAY to false for a more responsive server.
 const SHOULD_DELAY = true;
@@ -41,6 +44,10 @@ app.post('/auth', function (req, res) {
   } else {
     res.status(401).send({"message": "Invalid credentials"});
   }
+});
+
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
 });
 
 app.listen(app.get('port'), function () {
