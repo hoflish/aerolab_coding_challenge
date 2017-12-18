@@ -11,10 +11,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "flow": "flow"
   },
   "devDependencies": {
     "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0"
+    "enzyme-adapter-react-16": "^1.1.0",
+    "flow-bin": "^0.61.0"
   }
 }
