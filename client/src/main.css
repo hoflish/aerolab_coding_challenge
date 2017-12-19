@@ -238,6 +238,18 @@ p {
   margin: 0 0 14px 0
 }
 
+/*
+-----------------------------
+  Helper selectors
+-----------------------------*/
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap
+}
+
+/* end helpers*/
+
 /* TODO: move button css to Button component; */
 /* button */
 .btn {
@@ -314,4 +326,79 @@ p {
   font-weight: 500;
   padding: 8px 4px;
   border-radius: 3px;
+}
+
+/* icons */
+
+
+.icon-alert_triangle {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -46px -10px;
+}
+
+.icon-chevron_left {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -266px -10px;
+}
+
+.icon-chevron_right {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -90px -10px;
+}
+
+.icon-chevrons_left {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -134px -10px;
+}
+
+.icon-chevrons_right {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -178px -10px;
+}
+
+.icon-coin {
+  width: 34px;
+  height: 34px;
+  background: url('./images/css_sprites.png') -486px -10px;
+}
+
+.icon-filter {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -442px -10px;
+}
+
+.icon-info {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -310px -10px;
+}
+
+.icon-menu {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -354px -10px;
+}
+
+.icon-settings {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -398px -10px;
+}
+
+.icon-wifi_off {
+  width: 24px;
+  height: 24px;
+  background: url('./images/css_sprites.png') -222px -10px;
+}
+
+.icon-x {
+  width: 16px;
+  height: 16px;
+  background: url('./images/css_sprites.png') -10px -10px;
 }

@@ -7,7 +7,7 @@ const PHRASES = {
     phrase: 'Your are logging out',
     hint: 'You must log in to see the products'
   },
-  internal_error: "Oops! Something went wrong.",
+  internal_error: "Oops! Something went wrong. Please try again later.",
   request_timeout: "Request timed out",
   field_empty: "Fields can't be empty",
   retry: "Try again",

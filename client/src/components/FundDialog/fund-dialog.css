@@ -1,0 +1,33 @@
+.fund_dialog .mdc-dialog__surface {
+  width: 400px !important;
+  min-width: 300px;
+}
+
+.fund_dialog form {
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.fund-dialog__content {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.fund-dialog__content h1{
+  font-size: 18px;
+  color: inherit;
+  margin-bottom: 12px;
+}
+
+.fund_dialog form > button {
+  width: 100px;
+}
+
+.fund_dialog .radio-field {
+  margin-bottom: 12px;
+}
+
+.amount_updated {
+  color: #82EAC5;
+  margin-bottom: 12px;
+}

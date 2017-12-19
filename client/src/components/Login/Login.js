@@ -1,15 +1,16 @@
-import React, { Component } from 'react';
-import {connect} from "react-redux";
-import {withRouter} from "react-router-dom";
-import {loginSuccess} from "../../actions/action-creators/user-actions";
-import InputField from '../InputField/InputField';
-import FormField from '../FormField/FormField';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
+import { loginSuccess } from "../../actions/action-creators/user-actions";
+import EH from "../../libs/errors-handler";
+import InputField from "../InputField/InputField";
+import FormField from "../FormField/FormField";
 import Spinner from "../Spinner/Spinner";
 import helpers from "../../helpers";
-import phrases from '../../phrases';
+import phrases from "../../phrases";
 import CONFIG from "../../config/app";
 //import Events from 'ampersand-events';
-import './Login.css';
+import "./Login.css";
 
 class Login extends Component {
   constructor(props) {
@@ -24,10 +25,13 @@ class Login extends Component {
       password: ""
     };
     this._onlineCheck = null;
+    this.attempts = 0;
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
-    this.toggleCredentialsVisibility = this.toggleCredentialsVisibility.bind(this);
+    this.toggleCredentialsVisibility = this.toggleCredentialsVisibility.bind(
+      this
+    );
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onMouseEnter = this.onMouseEnter.bind(this);
     this.onMouseLeave = this.onMouseLeave.bind(this);
@@ -62,13 +66,13 @@ class Login extends Component {
     this.setState({
       [e.target.dataset.field]: "",
       hover: false,
-      focus: false,
-    })
+      focus: false
+    });
   }
 
   componentWillMount() {
     if (this.props.isLoggedIn) {
-      this.props.history.push('/');
+      this.props.history.push("/");
     }
   }
 
@@ -107,7 +111,11 @@ class Login extends Component {
       return;
     }
 
-    this.onSend(username, password);
+    const credentials = Object.create(null);
+    credentials.username = username;
+    credentials.password = password;
+
+    this.onSend(credentials);
   }
 
   sendPayload(data) {
@@ -115,25 +123,21 @@ class Login extends Component {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Accept": "application/json"
+        Accept: "application/json"
       },
       body: JSON.stringify(data)
     });
   }
 
-  onSend(username, password) {
-    const credentials = Object.create(null);
-    credentials.username = username;
-    credentials.password = password;
-
+  onSend(credentials) {
     const self = this;
     this.setState({ PROCESSING: true });
 
-     new Promise((resolve, reject) => {
-      return self.sendPayload(credentials)
+    new Promise((resolve, reject) => {
+      return self
+        .sendPayload(credentials)
         .then(response =>
-          response.json().then(accessToken => ({ accessToken, response }))
-        )
+          response.json().then(accessToken => ({ accessToken, response })))
         .then(({ accessToken, response }) => {
           if (!response.ok) {
             // to fix: "Warning: a promise was rejected with a non-error: [object Error]"
@@ -155,41 +159,42 @@ class Login extends Component {
           return false;
         }
       })
-      .then((token) => {
-      if (token) {
-        self.props.dispatch(loginSuccess(token));
+      .then(token => {
+        if (token) {
+          self.props.dispatch(loginSuccess(token));
+        } else {
+          console.error("Storage: Could not store accessToken");
+        }
         return null;
-      } else {
-        console.error("Storage: Could not store accessToken");
-        return null;
-      }
-    })
+      })
       .catch(err => {
-        // TODO: add internal attempts code...
+        // TODO: log errors to log-service ...
         if (err instanceof Promise.TimeoutError) {
-            this._onlineCheck = helpers.checkOnline().then(res => {
-              if (!res) {
-                self.setState({
-                  PROCESSING: false,
-                  password: "",
-                  hasError: phrases("check_internet_connection").phrase,
-                });
-              }
-              else {
+          this._onlineCheck = helpers.checkOnline().then(res => {
+            if (!res) {
+              self.setState({
+                PROCESSING: false,
+                password: "",
+                hasError: phrases("check_internet_connection").phrase
+              });
+            } else {
+              if (++this.attempts > 2) {
                 self.setState({
                   hasError: phrases("internal_error"),
                   password: "",
                   PROCESSING: false
                 });
+              } else {
+                this.attempts++;
+                this.onSend(credentials);
               }
-
-            });
-        }
-        else {
+            }
+          });
+        } else {
           self.setState({
             hasError: err.message,
             PROCESSING: false,
-            password: "",
+            password: ""
           });
 
           console.log("Error: " + err);
@@ -201,7 +206,6 @@ class Login extends Component {
         console.log("done!");
       });
   }
-
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn !== this.props.isLoggedIn) {
@@ -223,7 +227,13 @@ class Login extends Component {
   }
 
   render() {
-    const { SHOW_CREDENTIALS, PROCESSING, hasError, username, password } = this.state;
+    const {
+      SHOW_CREDENTIALS,
+      PROCESSING,
+      hasError,
+      username,
+      password
+    } = this.state;
     return (
       <main id="loginPage" role="main">
         <div className="loginWrap">
@@ -233,31 +243,36 @@ class Login extends Component {
               <h1>Marketch</h1>
             </div>
             {/* Display errors */}
-            {hasError !== undefined ? (
-              <div className="hasError">
-                <span>{hasError}</span>
-              </div>
-            ) : null}
+            {hasError !== undefined
+              ? <div className="hasError">
+                  <span>{hasError}</span>
+                </div>
+              : null}
 
             {/* show credentials*/}
-            <div className="loginCreds" >
+            <div className="loginCreds">
               <div className="creds">
-                {!SHOW_CREDENTIALS ? <span>{phrases('missing_credentials')}</span> :
-                  <span>
-                    <ul>
-                      <li>Username: <code>user123</code></li>
-                      <li>Password: <code>secret</code></li>
-                    </ul>
-                  </span>
-                }
+                {!SHOW_CREDENTIALS
+                  ? <span>{phrases("missing_credentials")}</span>
+                  : <span>
+                      <ul>
+                        <li>Username: <code>hassan</code></li>
+                        <li>Password: <code>secret</code></li>
+                      </ul>
+                    </span>}
               </div>
-              <span><button onClick={this.toggleCredentialsVisibility} className="btn toggleCredsBtn defaultBtn">
-                {SHOW_CREDENTIALS ? "Hide" : "Show"}
-                </button></span>
+              <span>
+                <button
+                  onClick={this.toggleCredentialsVisibility}
+                  className="btn toggleCredsBtn defaultBtn"
+                >
+                  {SHOW_CREDENTIALS ? "Hide" : "Show"}
+                </button>
+              </span>
             </div>
             <form id="loginForm" onSubmit={this.handleSubmit}>
               {/* Username field */}
-              <FormField >
+              <FormField>
                 <InputField
                   type="text"
                   name="username"
@@ -269,25 +284,38 @@ class Login extends Component {
                   action={this.handleUsernameChange}
                   value={username}
                 />
-                { username ?  <button /*TODO: fix tab bug*/
-                  disabled={PROCESSING}
-                  className="icon"
-                  data-field="username"
-                  onClick={this.onCleanField}
-                  onMouseEnter={this.onMouseEnter}
-                  onMouseLeave={this.onMouseLeave}
-                  onFocus={this.onFocus}
-                  onBlur={this.onBlur}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       width="16" height="16" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" strokeWidth="2"
-                       strokeLinecap="round" strokeLinejoin="round"
-                       className={this.state.hover || this.state.focus ? "feather-hovered" : "feather feather-x"} >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button> : null}
+                {username
+                  ? <button /*TODO: fix tab bug*/
+                      disabled={PROCESSING}
+                      className="icon"
+                      data-field="username"
+                      onClick={this.onCleanField}
+                      onMouseEnter={this.onMouseEnter}
+                      onMouseLeave={this.onMouseLeave}
+                      onFocus={this.onFocus}
+                      onBlur={this.onBlur}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className={
+                          this.state.hover || this.state.focus
+                            ? "feather-hovered"
+                            : "feather feather-x"
+                        }
+                      >
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
+                    </button>
+                  : null}
               </FormField>
 
               {/* Password field */}
@@ -303,31 +331,48 @@ class Login extends Component {
                   action={this.handlePasswordChange}
                   value={password}
                 />
-                {password ?  <button
-                  disabled={PROCESSING}
-                  className="icon"
-                  data-field="password"
-                  onClick={this.onCleanField}
-                  onMouseEnter={this.onMouseEnter}
-                  onMouseLeave={this.onMouseLeave}
-                  onFocus={this.onFocus}
-                  onBlur={this.onBlur}
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg"
-                       width="16" height="16" viewBox="0 0 24 24"
-                       fill="none" stroke="currentColor" strokeWidth="2"
-                       strokeLinecap="round" strokeLinejoin="round"
-                       className={this.state.hover || this.state.focus ? "feather-hovered" : "feather feather-x"} >
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
-                </button> : null}
+                {password
+                  ? <button
+                      disabled={PROCESSING}
+                      className="icon"
+                      data-field="password"
+                      onClick={this.onCleanField}
+                      onMouseEnter={this.onMouseEnter}
+                      onMouseLeave={this.onMouseLeave}
+                      onFocus={this.onFocus}
+                      onBlur={this.onBlur}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className={
+                          this.state.hover || this.state.focus
+                            ? "feather-hovered"
+                            : "feather feather-x"
+                        }
+                      >
+                        <line x1="18" y1="6" x2="6" y2="18" />
+                        <line x1="6" y1="6" x2="18" y2="18" />
+                      </svg>
+                    </button>
+                  : null}
               </FormField>
 
               {/* Login button */}
               <span className="loginBtn">
-                <button disabled={PROCESSING} type="submit" className="btn primaryBtn">
-                  {PROCESSING ? <Spinner btnSpinner size={16} hasText="processing"/> : "Login"}
+                <button
+                  disabled={PROCESSING}
+                  type="submit"
+                  className="btn primaryBtn"
+                >
+                  {PROCESSING ? <Spinner size={"small"} /> : "Login"}
                 </button>
               </span>
             </form>

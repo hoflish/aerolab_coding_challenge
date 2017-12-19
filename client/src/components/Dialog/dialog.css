@@ -1,0 +1,63 @@
+.mdc-dialog__surface {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15);
+  position: absolute;
+  top: 64px;
+}
+
+.mdc-dialog__header {
+  border-radius: 3px 3px 0 0;
+  font-weight: bold;
+  line-height: 19px;
+  padding: 10px 12px;
+}
+
+.mdc-dialog__body {
+  padding: 0 12px;
+  margin: 12px 0;
+  line-height: 19px;
+  font-size: 14px;
+  background-color: #fff;
+  word-wrap: break-word;
+}
+
+.mdc-dialog__footer {
+  border-top: 1px solid #dddfe2;
+  padding: 10px 12px;
+  background-color: #fff;
+  text-align: right;
+  border-radius: 0 0 3px 3px;
+
+}
+
+.mdc-dialog__body--scrollable {
+  border: none;
+}
+
+
+.dialog-title {
+  color: #1d2129;
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 12px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.dialog-title--wrapper {
+  flex: 1 1 0;
+  position: relative;
+  width: 0;
+}
+
+.mdc-dialog__header .icon-x {
+  position: absolute;
+  right: 10px;
+}
+
+.mdc-dialog--open {
+  background-color: rgba(0,0,0,.4);
+}

@@ -4,7 +4,12 @@ import { Link } from "react-router-dom";
 import HeaderItem from "../HeaderItem/HeaderItem";
 import './HeaderUserData.css';
 
-const HeaderUserData = ({ user }) => {
+const HeaderUserData = ({ user, onOpenDialog }) => {
+   function onAction(e) {
+    if (e.isTrusted && !e.repeat) {
+      onOpenDialog && onOpenDialog(e);
+    }
+  }
   return (
     <div className="HeaderUser">
       {/* user's points */}
@@ -17,7 +22,7 @@ const HeaderUserData = ({ user }) => {
         </span>
       </div>
       <div className="HeaderUser__fund">
-        <button onClick={() => {}} className="btn fundBtn defaultBtn">
+        <button onClick={onAction} className="btn fundBtn defaultBtn">
           Fund your account
         </button>
       </div>

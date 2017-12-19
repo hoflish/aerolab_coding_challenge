@@ -6,7 +6,12 @@ import HeaderUserGuest from "./HeaderUserGuest/HeaderUserGuest";
 import HeaderUserData from "./HeaderUserData/HeaderUserData";
 import "./Header.css";
 
-const Header = ({ user, isLoggedIn }) => {
+const Header = ({ user, isLoggedIn, onOpenDialog }) => {
+  function onAction(e) {
+    if (e.isTrusted && !e.repeat) {
+      onOpenDialog && onOpenDialog(e);
+    }
+  }
   return (
     <header>
       <div className="header">
@@ -15,7 +20,7 @@ const Header = ({ user, isLoggedIn }) => {
         </HeaderItem>
          <HeaderItem>
            {isLoggedIn
-            ? <HeaderUserData user={user} />
+            ? <HeaderUserData onOpenDialog={onAction} user={user} />
             : <HeaderUserGuest className="HeaderLink" />}
          </HeaderItem>
       </div>

@@ -1,0 +1,36 @@
+#dropError {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+.dropError-desc {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
+}
+.dropError-icon {
+  margin-right: 8px;
+}
+
+.dropError-title {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 12px;
+  justify-content: center;
+}
+
+.dropError-action a {
+  font-size: 14px;
+  text-decoration: underline;
+}
+
+.dropError-hint {
+  font-size: 14px;
+}
+

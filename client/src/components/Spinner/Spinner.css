@@ -1,4 +1,4 @@
-.spinner-wrapper {
+.sk-three-bounce {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -8,96 +8,58 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-}
-
-.spinner {
   z-index: 2;
 }
 
-.spinner {
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+.sk-child {
+  background-color: #d3d3f2;
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-three-bounce 1.4s ease-in-out 0s infinite both;
+  animation: sk-three-bounce 1.4s ease-in-out 0s infinite both;
 }
-
-.spinner {
-  -webkit-animation: spin 2s linear infinite;
-  animation: spin 2s linear infinite;
+.sk-three-bounce .sk-child {
+    width: 20px;
+    height: 20px;
 }
-
-.spinner-stroke {
-  stroke-dasharray: 1,150;
-  /* 1%, 101% circumference */
-  stroke-dashoffset: 0;
-  stroke-linecap: round;
-  -webkit-animation: animateStroke 1.5s ease-in-out infinite;
-  animation: animateStroke 1.5s ease-in-out infinite;
-  stroke: #acb9bf;
-}
-
-.spinner-text {
-  margin-left: 8px;
-}
-
-@-webkit-keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes spin {
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes animateStroke {
-  0% {
-    stroke-dasharray: 1,150;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: -35;
-  }
-  100% {
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: -124;
-  }
-}
-
-@keyframes animateStroke {
-  0% {
-    stroke-dasharray: 1,150;
-    stroke-dashoffset: 0;
-  }
-  50% {
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: -35;
-  }
-  100% {
-    stroke-dasharray: 90,150;
-    stroke-dashoffset: -124;
-  }
-}
-
-.btn-spinner {
-  display: inline-flex;
-  align-items: center;
+.sk-three-bounce-small {
   position: relative;
-  vertical-align: middle;
-  margin-bottom: 3px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 2px;
 }
 
-.btn-spinner .spinner-stroke {
-  stroke: #fff;
+.sk-three-bounce-small .sk-child {
+   width: 10px;
+    height: 10px;
 }
 
-.spinner__relative {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 350px;
-}
+
+  .sk-bounce1 {
+    -webkit-animation-delay: -0.32s;
+            animation-delay: -0.32s;
+          }
+  .sk-bounce2 {
+    -webkit-animation-delay: -0.16s;
+            animation-delay: -0.16s;
+          }
+@-webkit-keyframes sk-three-bounce {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+          }
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+            }
+          }
+@keyframes sk-three-bounce {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+            transform: scale(0);
+          }
+  40% {
+    -webkit-transform: scale(1);
+            transform: scale(1);
+            }
+          }
