@@ -5,5 +5,5 @@ export default {
   CATEGORIES: "catgs",
   AMOUNT_LIMIT: 5e4,
   HEROKU_URL: "https://safe-earth-89671.herokuapp.com/api/auth",
-  LOCAL_URL: "http:localhost:5000/api/auth",
+  LOCAL_URL: "http://localhost:5000/api/auth",
 }

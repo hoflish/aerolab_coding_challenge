@@ -111,7 +111,7 @@ class HeaderContainer extends Component {
         <FundDialog
           hasError={hasError}
           isUpdating={isUpdating}
-          submitfund={(evt, amount) => this.onSubmitFund}
+          submitfund={this.onSubmitFund}
           className="fund_dialog"
           open={open}
           onClose={this.onClose.bind(this)}

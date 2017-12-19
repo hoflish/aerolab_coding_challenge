@@ -21,9 +21,9 @@ class FundDialog extends Component {
   }
 
   handleFormSubmit(evt) {
-    //evt.preventDefault();
+    evt.preventDefault();
     const { submitfund } = this.props;
-    submitfund(evt, this.state.selectedAmount);
+    submitfund && submitfund(evt, this.state.selectedAmount);
   }
 
   render() {
@@ -55,7 +55,7 @@ class FundDialog extends Component {
               </div>
             : null}
           <h1>Choose an amount:</h1>
-          <form onSubmit={() => this.handleFormSubmit}>
+          <form onSubmit={this.handleFormSubmit}>
             <div className="radio-field">
               <label>
                 <input
