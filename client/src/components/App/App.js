@@ -17,6 +17,7 @@ import EH from "../../libs/errors-handler";
 import Footer from "../Footer/Footer";
 import Spinner from "../Spinner/Spinner";
 import HeaderContainer from "../HeaderContainer/HeaderContainer";
+import MainContainer from "../MainContainer/MainContainer";
 
 class App extends Component {
   constructor(props) {
@@ -114,10 +115,13 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.newAmount !== this.props.newAmount) {
-      this.handleUserDataResponse();
+      if (
+        nextProps.newAmount !== this.props.newAmount ||
+        nextProps.redeemedItem !== this.props.redeemedItem
+      ) {
+        this.handleUserDataResponse();
+      }
     }
-  }
 
   render() {
     const { info } = this.state;
@@ -130,7 +134,7 @@ class App extends Component {
         <div>
           <HeaderContainer />
 
-          {/*<MainContainer />*/}
+          <MainContainer />
 
           {/*<Footer />*/}
         </div>
@@ -142,7 +146,8 @@ class App extends Component {
 function mapStateToProps(state, ownProps) {
   return {
     isLoggedIn: state.account.isLoggedIn,
-    newAmount: state.account.newAmount
+    newAmount: state.account.newAmount,
+    redeemedItem: state.product.redeemedItem,
   };
 }
 

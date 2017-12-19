@@ -10,9 +10,6 @@ export const loadState = (state = "state") => {
 
 export const saveState = (stateData, stateName) => {
   try {
-    if (stateName === "state") {
-      delete stateData.account.user['redeemHistory'];
-    }
     let serializeState = JSON.stringify(stateData);
     window.localStorage.setItem(stateName, serializeState);
   } catch (err) {

@@ -248,6 +248,10 @@ p {
   white-space: nowrap
 }
 
+.paddingTop16 {
+  padding-top: 16px;
+}
+
 /* end helpers*/
 
 /* TODO: move button css to Button component; */
@@ -328,9 +332,8 @@ p {
   border-radius: 3px;
 }
 
+
 /* icons */
-
-
 .icon-alert_triangle {
   width: 24px;
   height: 24px;
@@ -402,3 +405,111 @@ p {
   height: 16px;
   background: url('./images/css_sprites.png') -10px -10px;
 }
+
+/*  Main component css */
+#mainContent {
+  position: relative;
+  border-left: 1px solid #d9d9d9;
+  overflow: hidden;
+}
+
+.mainContent__padding {
+  padding: 32px 12px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  border-bottom: 1px solid #d9d9d9;
+  padding: 8px 16px;
+}
+
+.productSort {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.productSort > select {
+  margin-left: 4px;
+}
+
+.productPagination--offset {
+  /*color: #828287;*/
+}
+
+.productPagination--pageLinks {
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.productPagination--pageLinks > ul {
+  display: inline-flex;
+}
+
+.productPagination--pageLinks > ul > li {
+  margin: 0 4px;
+}
+
+.productPagination--pageLinks > button {
+  margin: 0 8px;
+}
+
+.productPagination--pageLinks .page-link__active a{
+  color: #828287;
+  background-color: rgba(211, 211, 242,.456);;
+  border-radius: 4px;
+}
+
+.productPagination--pageLinks a {
+  position: relative;
+  display: inline-flex;
+  padding: 4px 6px;
+  margin-left: -1px;
+  line-height: 1;
+  justify-content: center;
+  align-items: center;
+  color: #8C9AE7;
+  font-weight: 500;
+}
+
+.productPagination--pageLinks > button:disabled {
+  opacity: .4;
+}
+
+#mainContent #dropError {
+  position: relative;
+  min-height: 300px;
+}
+
+@media screen and (max-width: 768px ) {
+    #sideBar {
+        display: none;
+    }
+    #mainContent {
+      margin-left: 0;
+      border-left: none;
+    }
+    #wrapContent {
+      padding: 0;
+    }
+
+    .mainContent__padding {
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .al-row {
+      padding: 0 8px;
+    }
+    .productsLists  {
+      width:calc(100% - 32px);
+      grid-gap: 12px;
+    }
+}
+
