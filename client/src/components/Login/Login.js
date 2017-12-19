@@ -10,7 +10,6 @@ import phrases from "../../phrases";
 import CONFIG from "../../_config/app";
 //import Events from 'ampersand-events';
 import "./Login.css";
-
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -117,8 +116,15 @@ class Login extends Component {
     this.onSend(credentials);
   }
 
+  isHttps(e) {
+    return e && "https://" === e.toLowerCase().substring(0, 8);
+  }
+
   sendPayload(data) {
-    return fetch("http://localhost:5000/api/auth", {
+    const href = this.isHttps(window.location.href)
+      ? CONFIG.HEROKU_URL
+      : CONFIG.LOCAL_URL;
+    return fetch(href, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
