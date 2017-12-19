@@ -2,15 +2,21 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import App from "../components/App/App";
+import Login from "../components/Login/Login";
+import ErrorBoundary from "../components/ErrorBoundary/ErrorBoundary";
+
 
 const Root = ({ store }) => (
   <Provider store={store}>
     <Router>
-      <Switch>
-        <Route exact path="/" component={() => <div>Main page</div>} />
-        <Route path="/login" component={() => <div>Login page</div>} />
-        <Route path="*" component={() => <div>Error404</div>} />
-      </Switch>
+        <ErrorBoundary>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/login" component={Login} />
+            <Route path="*" component={() => <div>Error404</div>} />
+          </Switch>
+        </ErrorBoundary>
     </Router>
   </Provider>
 );

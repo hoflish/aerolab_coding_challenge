@@ -17,7 +17,7 @@ const Root = ({ store }) => (
             <Route path="/login" component={Login} />
             <Route path="*" component={() => <div>Error404</div>} />
           </Switch>
-          {/*<DevTools /> */}
+          <DevTools />
         </ErrorBoundary>
     </Router>
   </Provider>

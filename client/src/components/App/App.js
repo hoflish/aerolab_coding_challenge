@@ -11,11 +11,8 @@ import {
   userMeFailed
 } from "../../actions/action-creators/user-actions";
 import helpers from "../../helpers";
-import phrases from "../../phrases";
 import { INFO } from "../../actions/_constants";
 import EH from "../../libs/errors-handler";
-import Footer from "../Footer/Footer";
-import Spinner from "../Spinner/Spinner";
 import HeaderContainer from "../HeaderContainer/HeaderContainer";
 import MainContainer from "../MainContainer/MainContainer";
 
@@ -55,12 +52,11 @@ class App extends Component {
     new Promise((resolve, reject) => {
       return self.getUserData().then(user => {
         if (!_.isEmpty(user)) {
-          resolve(user);
+          return resolve(user);
         }
-        reject(user);
+        return reject(user);
       });
     })
-      .bind(this)
       .timeout(CONFIG.TIMEOUT_DURATION)
       .then(user => {
         self.props.dispatch(userMeSuccess(user));
@@ -124,13 +120,14 @@ class App extends Component {
     }
 
   render() {
+    const {isLoggedIn} = this.props;
     const { info } = this.state;
     if (info === INFO.OFFLINE) {
       throw new EH.InternetConnError();
     } else if (info === INFO.TIMEOUT) {
       throw new EH.InternalError();
     } else {
-      return (
+      return isLoggedIn ? (
         <div>
           <HeaderContainer />
 
@@ -138,7 +135,7 @@ class App extends Component {
 
           {/*<Footer />*/}
         </div>
-      );
+      ) : null;
     }
   }
 }

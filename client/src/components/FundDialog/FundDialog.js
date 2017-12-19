@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import phrases from "../../phrases";
 import { Dialog, DialogHeader, DialogBody } from "../Dialog";
 import Spinner from "../Spinner/Spinner";
 import "./fund-dialog.css";
@@ -22,11 +21,9 @@ class FundDialog extends Component {
   }
 
   handleFormSubmit(evt) {
-    evt.preventDefault();
-    const { onAction } = this.props;
-    if (evt.isTrusted && !evt.repeat) {
-      onAction && onAction(evt, this.state.selectedAmount);
-    }
+    //evt.preventDefault();
+    const { submitfund } = this.props;
+    submitfund(evt, this.state.selectedAmount);
   }
 
   render() {
@@ -52,11 +49,13 @@ class FundDialog extends Component {
         <DialogBody className="fund-dialog__content" scrollable={_scrollable}>
           {/*Dialog Body*/}
           {/* TODO: refactoring this condition chain... bad code! */}
-          {hasError ? (<div className="hasError">
-              <span>{hasError}</span>
-            </div>) : null}
+          {hasError
+            ? <div className="hasError">
+                <span>{hasError}</span>
+              </div>
+            : null}
           <h1>Choose an amount:</h1>
-          <form onSubmit={this.handleFormSubmit}>
+          <form onSubmit={() => this.handleFormSubmit}>
             <div className="radio-field">
               <label>
                 <input
@@ -95,7 +94,7 @@ class FundDialog extends Component {
               className="btn primaryBtn"
               type="submit"
             >
-             {isUpdating ? <Spinner size={"small"} /> : "Submit"}
+              {isUpdating ? <Spinner size={"small"} /> : "Submit"}
             </button>
           </form>
           {/* End Dialog Body*/}
@@ -111,7 +110,7 @@ FundDialog.propTypes = {
   children: PropTypes.node,
   _scrollable: PropTypes.bool,
   onAction: PropTypes.func,
-  isUpdating: PropTypes.bool,
+  isUpdating: PropTypes.bool
 };
 
 FundDialog.defaultProps = {};

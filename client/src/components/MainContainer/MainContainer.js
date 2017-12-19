@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import _ from "lodash";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
@@ -31,6 +30,12 @@ class MainContainer extends Component {
     this.handlePagination = this.handlePagination.bind(this);
     this.handleSelectChange = this.handleSelectChange.bind(this);
   }
+
+  /*componentWillMount() {
+    if (this.props.isLoggedIn) {
+      this.props.history.push('/login');
+    }
+  }*/
 
   fetchProducts() {
     return new Promise((resolve, reject) => {
@@ -152,7 +157,7 @@ class MainContainer extends Component {
 
   render() {
     const { products, _STATE } = this.state;
-    const { user, productIds, page, sortValue, isLoggedIn } = this.props;
+    const { user, productIds, page, sortValue } = this.props;
     const productsSize = this.getProductsSize(productIds);
     return (
       <main id="mainContainer" role="main">
@@ -178,7 +183,6 @@ class MainContainer extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  isLoggedIn: state.account.isLoggedIn,
   user: state.account.user,
   productIds: state.product.productIds,
   page: state.product.page,

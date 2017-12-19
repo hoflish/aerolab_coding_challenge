@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import { loginSuccess } from "../../actions/action-creators/user-actions";
-import EH from "../../libs/errors-handler";
 import InputField from "../InputField/InputField";
 import FormField from "../FormField/FormField";
 import Spinner from "../Spinner/Spinner";

@@ -1,4 +1,3 @@
-import omit from 'lodash/omit'
 export const loadState = (state = "state") => {
   try {
     const serializeState = window.localStorage.getItem(state);

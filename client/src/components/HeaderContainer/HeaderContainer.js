@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import http from "../../services/http";
 import CONFIG from "../../config/app";
-import helpers from "../../helpers";
 import {
   userPointsUpdated,
   userPointsRequest,
@@ -24,6 +22,7 @@ class HeaderContainer extends Component {
     };
     this.onOpenFundDialog = this.onOpenFundDialog.bind(this);
     this.onClose = this.onClose.bind(this);
+    this.onSubmitFund = this.onSubmitFund.bind(this);
   }
 
   onOpenFundDialog() {
@@ -97,8 +96,8 @@ class HeaderContainer extends Component {
   }
 
   render() {
-    const { user, isLoggedIn, isFetchingMe, hasError, isUpdating, newAmount } = this.props;
-    const { open, opState } = this.state;
+    const { user, isLoggedIn, isFetchingMe, hasError, isUpdating } = this.props;
+    const { open } = this.state;
     if (isFetchingMe) {
       return <Spinner />;
     }
@@ -112,7 +111,7 @@ class HeaderContainer extends Component {
         <FundDialog
           hasError={hasError}
           isUpdating={isUpdating}
-          onAction={this.onSubmitFund.bind(this)}
+          submitfund={(evt, amount) => this.onSubmitFund}
           className="fund_dialog"
           open={open}
           onClose={this.onClose.bind(this)}

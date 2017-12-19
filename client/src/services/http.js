@@ -1,6 +1,5 @@
 // @flow
 import CONFIG from '../config/app';
-import {loadState} from '../utils/localStorage';
 
 const callApi = (method: "get" | "post", endpoint, data) => {
   const headers = new Headers({

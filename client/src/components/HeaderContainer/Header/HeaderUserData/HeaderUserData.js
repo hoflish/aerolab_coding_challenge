@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import HeaderItem from "../HeaderItem/HeaderItem";
 import './HeaderUserData.css';
 
 const HeaderUserData = ({ user, onOpenDialog }) => {
