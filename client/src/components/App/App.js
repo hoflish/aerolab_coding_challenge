@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import _ from "lodash";
-import CONFIG from "../../config/app";
+import CONFIG from "../../_config/app";
 import http from "../../services/http";
 import { loadState } from "../../utils/localStorage";
 import {

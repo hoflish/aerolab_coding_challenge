@@ -1,5 +1,5 @@
 // @flow
-import CONFIG from '../config/app';
+import CONFIG from '../_config/app';
 
 const callApi = (method: "get" | "post", endpoint, data) => {
   const headers = new Headers({

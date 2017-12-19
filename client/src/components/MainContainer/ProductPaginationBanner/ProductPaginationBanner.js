@@ -1,6 +1,6 @@
 import React from "react";
 import { number } from "prop-types";
-import CONFIG from "../../../config/app";
+import CONFIG from "../../../_config/app";
 
 export default function ProductPaginationBanner({ productsSize, page, onPaginate }) {
 

@@ -7,7 +7,7 @@ import FormField from "../FormField/FormField";
 import Spinner from "../Spinner/Spinner";
 import helpers from "../../helpers";
 import phrases from "../../phrases";
-import CONFIG from "../../config/app";
+import CONFIG from "../../_config/app";
 //import Events from 'ampersand-events';
 import "./Login.css";
 

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import _ from "lodash";
 import http from "../../services/http";
-import CONFIG from "../../config/app";
+import CONFIG from "../../_config/app";
 import {
   userPointsUpdated,
   userPointsRequest,

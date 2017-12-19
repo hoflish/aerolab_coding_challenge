@@ -1,5 +1,5 @@
 // @flow
-import CONFIG from '../config/app';
+import CONFIG from '../_config/app';
 import _ from 'lodash';
 
 function getResponseIfOnline(statusUrl: string): Promise<*> {
