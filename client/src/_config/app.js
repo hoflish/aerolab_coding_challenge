@@ -4,6 +4,6 @@ export default {
   PAGINATION_LIMIT_NUMBER: 16,
   CATEGORIES: "catgs",
   AMOUNT_LIMIT: 5e4,
-  HEROKU_URL: "https://safe-earth-89671.herokuapp.com/",
+  HEROKU_URL: "https://safe-earth-89671.herokuapp.com/api/auth",
   LOCAL_URL: "http:localhost:5000/api/auth",
 }
