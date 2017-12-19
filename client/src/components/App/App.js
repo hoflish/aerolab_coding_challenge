@@ -111,31 +111,28 @@ class App extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-      if (
-        nextProps.newAmount !== this.props.newAmount ||
-        nextProps.redeemedItem !== this.props.redeemedItem
-      ) {
-        this.handleUserDataResponse();
-      }
+    if (
+      nextProps.newAmount !== this.props.newAmount ||
+      nextProps.redeemedItem !== this.props.redeemedItem
+    ) {
+      this.handleUserDataResponse();
     }
+  }
 
   render() {
-    const {isLoggedIn} = this.props;
+    const { isLoggedIn } = this.props;
     const { info } = this.state;
-    if (info === INFO.OFFLINE) {
-      throw new EH.InternetConnError();
-    } else if (info === INFO.TIMEOUT) {
-      throw new EH.InternalError();
-    } else {
-      return isLoggedIn ? (
-        <div>
+    switch (info) {
+      case INFO.OFFLINE:
+        throw new EH.InternetConnError();
+      case INFO.TIMEOUT:
+        throw new EH.InternalError();
+      default:
+        return (<div>
           <HeaderContainer />
-
           <MainContainer />
-
           {/*<Footer />*/}
-        </div>
-      ) : null;
+        </div>);
     }
   }
 }
@@ -144,7 +141,7 @@ function mapStateToProps(state, ownProps) {
   return {
     isLoggedIn: state.account.isLoggedIn,
     newAmount: state.account.newAmount,
-    redeemedItem: state.product.redeemedItem,
+    redeemedItem: state.product.redeemedItem
   };
 }
 
