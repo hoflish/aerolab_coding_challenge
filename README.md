@@ -15,6 +15,13 @@ $ yarn install or npm install
 $ yarn start
 ```
 
+### Set variable environment (windows)
+```bash
+$ set USERNAME=hassan   //or use another username
+$ set PASSWORD=secret // or use another password
+$ set ACCESS_TOKEN=your_access_token // token received on my email when I subscribed to the Aerolab challenge (challenge is already closed)
+```
+
 
 ### Run the Client React App
 
